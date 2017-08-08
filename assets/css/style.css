@@ -1,34 +1,49 @@
 button {
 		margin:10px;
+		background-color:red !important;
+		color: white; 
+border: 2px solid grey !important;
+
 	}
 
 	body {
 		background-image: url(../images/nintendo_games_pattern_by_dagneo-d94rp2z.png);
-		
+		margin-left: 20px;
+	margin-right: 20px;
+	border:2px solid black;
+
 	}
 
-	h2 {
-		background-color: black; 
-		color: white;
-		text-align: center;
 
+	h2 {
+		background-color: black !important  ;
+		color: red !important;
+		text-align: center;
+		border: 2px solid grey;
+		
 
 	}
 	#nintendoTabs, #inputName {
-		background-color: lightgrey;
+		background-color: black;
+		color: white;
+
+
 	}
 
 	#gifsHere { background-color: black;
-		width: 500px;
+		width: 550px;
 		color: white;
 		text-align: center;
 		font-size: 24px;
+		border: 2px solid grey;
 
 	}
 
 	#footer{
-		background-color: #efefef;
-		color: black;
+		background-color: black;
+		color: white;
 		bottom:1%;
-		margin-top: 82px;
+		
 	padding: 17px;
+	border-top: 2px solid grey;
+	

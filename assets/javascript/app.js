@@ -1,4 +1,6 @@
-var topic =["Mario", "Luigi", "Link","Samus","Yoshi","Kirby","Fox McCloud","Little Mac","Pit(Icarus)","Donkey Kong","Marth"]
+
+//array
+var topic =["Mario", "Luigi", "Link","Samus","Yoshi","Kirby","Fox McCloud","Little Mac","Pit(Icarus)","Donkey Kong","Marth","Ice Climbers","Bowser","Ness","Princess Peach"]
 
 function playPauseGif (){
 	var state = $(this).attr("data-state");
@@ -56,7 +58,7 @@ $("#gifsHere").prepend(charDiv);
 function createNintendoTabs(){
 	$("#nintendoTabs").html("");
 for (var j=0; j<topic.length;j++){
-	var createButton = $("<button>");
+	var createButton = $("<button class=btn btn-primary>");
 	createButton.addClass("ninChar");
 	createButton.attr("data-name", topic[j]);
 	createButton.text(topic[j]);
