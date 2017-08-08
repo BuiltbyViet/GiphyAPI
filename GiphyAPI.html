@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nintendo Gifs</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<style type="text/css">
+	button {
+		margin:10px;
+	}
+
+	body {
+		background-image: url(images/nintendo_games_pattern_by_dagneo-d94rp2z.png);
+		
+	}
+
+	h2 {
+		background-color: black; 
+		color: white;
+		text-align: center;
+
+
+	}
+	#nintendoTabs, #inputName {
+		background-color: lightgrey;
+	}
+
+	#gifsHere { background-color: black;
+		width: 500px;
+		color: white;
+		text-align: center;
+		font-size: 24px;
+
+	}
+
+	#footer{
+		background-color: #efefef;
+		color: black;
+		bottom:1%;
+		margin-top: 82px;
+	padding: 17px;
+	}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<h2 class="jumbotron">Nintendo Character Search</h2>
+
+
+
+<div id="nintendoTabs" ></div>
+<form id="inputName" >Add a Nintendo Character here:
+<input type="text" id="typeHere" name="character name">
+<button type="submit" id="addChar" >Submit</button>
+</form>
+<div id="gifsHere"></div>
+<footer id="footer">copyright 2017 Viet Nguyen</footer>
+
+
+
+<script type="text/javascript">
+	var topic =["Mario", "Luigi", "Link","Samus","Yoshi","Kirby","Fox McCloud","Little Mac","Pit(Icarus)","Donkey Kong","Marth"]
+
+function playPauseGif (){
+	var state = $(this).attr("data-state");
+if (state === "still") {
+	var nintendoAnimateURL = $(this).attr("data-animate");
+        $(this).attr("src", nintendoAnimateURL);
+        $(this).attr("data-state", "animate");
+      } else {
+      var nintendoStillURL = $(this).attr("data-still");
+        $(this).attr("src", nintendoStillURL);
+        $(this).attr("data-state", "still");
+      }
+    };
+
+
+
+function displayNintendoCharInfo(){
+var charNameStill = $(this).attr("data-name");
+var queryURL = "https://api.giphy.com/v1/gifs/search?q="+charNameStill+"&api_key=47344ce4668c4391a1724e13caf6fddf&limit=10";
+
+
+$.ajax({
+	url: queryURL,
+	method: "GET"
+})
+
+.done(function(response){
+	
+	console.log(response);	
+
+	
+	
+//click on Char name button
+var results = response.data;
+
+//$(".ninChar").on("click", function() {
+for (var i = 0; i < results.length; i++) {
+var charDiv = $("<div>");
+var p = $("<p>").text("Rating: +" + results[i].rating);
+var charImage = $("<img>");
+charImage.attr("src", results[i].images.downsized_still.url);
+charImage.attr("data-still", results[i].images.downsized_still.url);
+charImage.attr("data-state", "still");
+charImage.attr("data-animate", results[i].images.downsized_large.url);
+charImage.addClass("gif");
+charDiv.append(p);
+charDiv.append(charImage);
+$("#gifsHere").prepend(charDiv);
+};
+});
+};
+
+
+//create new buttons
+function createNintendoTabs(){
+	$("#nintendoTabs").html("");
+for (var j=0; j<topic.length;j++){
+	var createButton = $("<button>");
+	createButton.addClass("ninChar");
+	createButton.attr("data-name", topic[j]);
+	createButton.text(topic[j]);
+	$("#nintendoTabs").append(createButton);
+}
+};
+createNintendoTabs();
+
+//adding new nintendo character names into array when clicking Submit
+$("#addChar").on("click", function(event){
+event.preventDefault();
+var inputCharName = $("#typeHere").val().trim();
+topic.push(inputCharName);
+createNintendoTabs();
+
+});
+
+$(document).on("click", ".ninChar", displayNintendoCharInfo);
+
+
+$(document).on("click",".gif", playPauseGif);
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
